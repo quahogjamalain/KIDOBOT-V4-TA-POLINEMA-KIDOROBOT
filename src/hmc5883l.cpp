@@ -1,9 +1,9 @@
 #include <Arduino.h>
-#include <Ps3Controller.h>
+// #include <Ps3Controller.h>
 #include <Wire.h>
 // #include "../lib/lib_hmc_magneto/magneto.h"
 
-#define PS3_ADDR "2C:81:58:A1:A1:07"
+// #define PS3_ADDR "2C:81:58:A1:A1:07"
 
 float data_x = 0.0f;
 float data_y = 0.0f;
@@ -161,13 +161,12 @@ constexpr int PWM_RES = 8;
 
 void setup(){
     Serial.begin(115200);
-    Ps3.begin(PS3_ADDR);
+    // // Ps3.begin(PS3_ADDR);
     pinMode(int_pin, INPUT);
     attachInterrupt(digitalPinToInterrupt(int_pin), set_flag_update, RISING);
     Wire.begin();
     setup_device();
     delay(1000);
-
 
     ledcSetup(pwmB_1_c, PWM_FREQ, PWM_RES);
     ledcSetup(pwmA_1_c, PWM_FREQ, PWM_RES);
@@ -186,26 +185,26 @@ void setup(){
 }
 
 void loop(){
-    uint8_t cross = Ps3.data.button.cross;
-    uint8_t circle = Ps3.data.button.circle;
-    uint8_t square = Ps3.data.button.square;
-    uint8_t triangle = Ps3.data.button.triangle;
+    // uint8_t cross = Ps3.data.button.cross;
+    // uint8_t circle = Ps3.data.button.circle;
+    // uint8_t square = Ps3.data.button.square;
+    // uint8_t triangle = Ps3.data.button.triangle;
 
-    if(cross){
-        target = 0.0f;
-    }
+    // if(cross){
+    //     target = 0.0f;
+    // }
 
-    else if(circle){
-        target = 90.0f;
-    }
+    // else if(circle){
+    //     target = 90.0f;
+    // }
 
-    else if(triangle){
-        target = 180.0f;
-    }
+    // else if(triangle){
+    //     target = 180.0f;
+    // }
 
-    else if(square){
-        target = 270.0f;
-    }
+    // else if(square){
+    //     target = 270.0f;
+    // }
 
     if(data_ready_flag){
         data_ready_flag = false;
