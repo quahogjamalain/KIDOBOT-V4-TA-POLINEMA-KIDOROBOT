@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071022" />
+    <meta
+      name="description"
+      content="Kidobot Studio - playground robotik visual dengan viewport 3D dan pemrograman blok."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Kidobot Studio - Robot Playground</title>
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="icon-cube" viewBox="0 0 24 24">
+        <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
+        <path d="m4 7.5 8 4.5 8-4.5M12 12v9" />
+      </symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="M8 5.5v13l10-6.5-10-6.5Z" fill="currentColor" stroke="none" />
+      </symbol>
+      <symbol id="icon-stop" viewBox="0 0 24 24">
+        <rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="currentColor" stroke="none" />
+      </symbol>
+      <symbol id="icon-undo" viewBox="0 0 24 24">
+        <path d="M9 8 4.5 12 9 16" />
+        <path d="M5 12h8.5a5.5 5.5 0 0 1 0 11H10" />
+      </symbol>
+      <symbol id="icon-redo" viewBox="0 0 24 24">
+        <path d="m15 8 4.5 4-4.5 4" />
+        <path d="M19 12h-8.5a5.5 5.5 0 0 0 0 11H14" />
+      </symbol>
+      <symbol id="icon-target" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="12" r="2.5" />
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+      </symbol>
+      <symbol id="icon-expand" viewBox="0 0 24 24">
+        <path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5" />
+      </symbol>
+      <symbol id="icon-reset" viewBox="0 0 24 24">
+        <path d="M4.5 9A8 8 0 1 1 4 14" />
+        <path d="M4.5 4.5V9H9" />
+      </symbol>
+      <symbol id="icon-camera" viewBox="0 0 24 24">
+        <path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4v-10Z" />
+        <circle cx="12" cy="13.5" r="3.2" />
+      </symbol>
+      <symbol id="icon-help" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M9.8 9a2.4 2.4 0 1 1 3.6 2.1c-.9.5-1.4 1-1.4 2.1M12 17.2h.01" />
+      </symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24">
+        <path d="m6 6 12 12M18 6 6 18" />
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="m15.5 15.5 5 5" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12.5 4.2 4L19 7" />
+      </symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="icon-sensor" viewBox="0 0 24 24">
+        <path d="M4 20V4M4 20h16" />
+        <path d="M8 16v-3M12 16V9M16 16V6" />
+      </symbol>
+      <symbol id="icon-compass" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
+      </symbol>
+      <symbol id="icon-blocks" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="8" height="8" rx="2" />
+        <rect x="13" y="3" width="8" height="8" rx="2" />
+        <rect x="3" y="13" width="8" height="8" rx="2" />
+        <path d="M17 13v8M13 17h8" />
+      </symbol>
+      <symbol id="icon-spark" viewBox="0 0 24 24">
+        <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z" />
+      </symbol>
+      <symbol id="icon-robot" viewBox="0 0 24 24">
+        <rect x="4" y="7" width="16" height="12" rx="4" />
+        <path d="M12 3v4M8.5 6h7" />
+        <circle cx="9" cy="13" r="1" fill="currentColor" stroke="none" />
+        <circle cx="15" cy="13" r="1" fill="currentColor" stroke="none" />
+        <path d="M9.5 16h5" />
+      </symbol>
+      <symbol id="icon-grid" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <path d="M9 3v18M15 3v18M3 9h18M3 15h18" />
+      </symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24">
+        <path d="m8 10 4 4 4-4" />
+      </symbol>
+      <symbol id="icon-drag" viewBox="0 0 24 24">
+        <circle cx="8" cy="7" r="1" fill="currentColor" stroke="none" />
+        <circle cx="16" cy="7" r="1" fill="currentColor" stroke="none" />
+        <circle cx="8" cy="12" r="1" fill="currentColor" stroke="none" />
+        <circle cx="16" cy="12" r="1" fill="currentColor" stroke="none" />
+        <circle cx="8" cy="17" r="1" fill="currentColor" stroke="none" />
+        <circle cx="16" cy="17" r="1" fill="currentColor" stroke="none" />
+      </symbol>
+    </svg>
+
+    <div class="app-background" aria-hidden="true">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+      <div class="ambient ambient-three"></div>
+      <div class="background-grid"></div>
+      <div class="background-noise"></div>
+    </div>
+
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Kidobot Studio">
+          <span class="brand-mark">
+            <span class="brand-orbit"></span>
+            <svg><use href="#icon-robot"></use></svg>
+          </span>
+          <span class="brand-copy">
+            <strong>KIDOBOT</strong>
+            <small>Robot Playground</small>
+          </span>
+        </a>
+
+        <div class="mission-strip">
+          <span class="mission-icon"><svg><use href="#icon-spark"></use></svg></span>
+          <span class="mission-copy">
+            <span>Misi 03</span>
+            <strong>Jelajahi Arena 8 x 8</strong>
+          </span>
+          <span class="mission-progress" aria-label="Progres misi 68 persen">
+            <i style="width: 68%"></i>
+          </span>
+          <span class="mission-percent">68%</span>
+        </div>
+
+        <div class="top-actions">
+          <div class="online-pill">
+            <span class="online-dot"></span>
+            <span>Simulator</span>
+            <strong>Online</strong>
+          </div>
+          <button class="icon-button" id="helpButton" type="button" aria-label="Buka bantuan">
+            <svg><use href="#icon-help"></use></svg>
+          </button>
+          <div class="demo-profile">
+            <span class="avatar">KB</span>
+            <span class="demo-copy">
+              <strong>Mode Demo</strong>
+              <small>Kelas Robotik</small>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <div class="left-rail">
+          <section class="panel viewer-panel" aria-labelledby="viewerTitle">
+            <header class="panel-heading">
+              <div class="heading-copy">
+                <span class="heading-icon heading-icon-viewer"><svg><use href="#icon-cube"></use></svg></span>
+                <div>
+                  <h1 id="viewerTitle">Tampilan Robot</h1>
+                  <p>Live simulator &middot; Arena 8 &times; 8</p>
+                </div>
+              </div>
+              <div class="viewer-actions">
+                <span class="live-badge"><i></i> LIVE 3D</span>
+                <button class="icon-button compact" id="resetRobotButton" type="button" aria-label="Reset posisi robot" title="Reset posisi robot">
+                  <svg><use href="#icon-reset"></use></svg>
+                </button>
+                <button class="icon-button compact" id="resetCameraButton" type="button" aria-label="Reset kamera" title="Reset kamera">
+                  <svg><use href="#icon-camera"></use></svg>
+                </button>
+                <button class="icon-button compact" id="fullscreenButton" type="button" aria-label="Layar penuh" title="Layar penuh">
+                  <svg><use href="#icon-expand"></use></svg>
+                </button>
+              </div>
+            </header>
+
+            <div class="viewport-shell" id="viewportShell">
+              <div class="viewport" id="viewport"></div>
+              <div class="viewport-scanlines" aria-hidden="true"></div>
+              <div class="viewport-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+              <div class="cell-badge">
+                <span>PETAK</span>
+                <strong id="cellBadge">04 &middot; 05</strong>
+              </div>
+
+              <div class="heading-card">
+                <div class="compass-dial" aria-hidden="true">
+                  <span class="compass-letter compass-n">U</span>
+                  <span class="compass-letter compass-e">T</span>
+                  <span class="compass-letter compass-s">S</span>
+                  <span class="compass-letter compass-w">B</span>
+                  <span class="compass-needle" id="compassNeedle"><i></i></span>
+                  <span class="compass-hub"></span>
+                </div>
+                <div class="heading-card-copy">
+                  <span>Orientasi</span>
+                  <strong id="orientationText">Depan &middot; Utara</strong>
+                </div>
+              </div>
+
+              <div class="speech-bubble" id="robotSpeech" hidden></div>
+
+              <div class="viewport-hint">
+                <svg><use href="#icon-drag"></use></svg>
+                <span>Drag untuk memutar &middot; Scroll untuk zoom</span>
+              </div>
+            </div>
+
+            <div class="telemetry-row">
+              <div class="telemetry-card">
+                <span class="telemetry-icon telemetry-orange"><svg><use href="#icon-target"></use></svg></span>
+                <span class="telemetry-copy">
+                  <small>Posisi robot</small>
+                  <strong>X <b id="positionX">04</b><i>&middot;</i>Y <b id="positionY">05</b></strong>
+                </span>
+              </div>
+              <div class="telemetry-card">
+                <span class="mini-compass" aria-hidden="true">
+                  <span class="mini-needle" id="miniCompassNeedle"></span>
+                </span>
+                <span class="telemetry-copy">
+                  <small>Menghadap</small>
+                  <strong id="facingText">Depan</strong>
+                </span>
+              </div>
+              <div class="telemetry-card">
+                <span class="telemetry-icon telemetry-teal"><svg><use href="#icon-sensor"></use></svg></span>
+                <span class="telemetry-copy">
+                  <small>Jarak depan</small>
+                  <strong><b id="distanceValue">3</b> petak</strong>
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel catalog-panel" aria-labelledby="catalogTitle">
+            <header class="panel-heading catalog-heading">
+              <div class="heading-copy">
+                <span class="heading-icon heading-icon-blocks"><svg><use href="#icon-blocks"></use></svg></span>
+                <div>
+                  <h2 id="catalogTitle">Katalog Blok</h2>
+                  <p>Klik atau drag blok ke workspace</p>
+                </div>
+              </div>
+              <label class="search-field">
+                <svg><use href="#icon-search"></use></svg>
+                <input id="blockSearch" type="search" placeholder="Cari blok..." autocomplete="off" />
+              </label>
+            </header>
+
+            <div class="category-tabs" id="categoryTabs" role="tablist" aria-label="Kategori blok">
+              <button class="category-tab active" type="button" data-category="semua" role="tab" aria-selected="true">
+                <i class="tab-dot tab-all"></i>Semua
+              </button>
+              <button class="category-tab" type="button" data-category="gerak" role="tab" aria-selected="false">
+                <i class="tab-dot tab-motion"></i>Gerak
+              </button>
+              <button class="category-tab" type="button" data-category="kontrol" role="tab" aria-selected="false">
+                <i class="tab-dot tab-control"></i>Kontrol
+              </button>
+              <button class="category-tab" type="button" data-category="tampilan" role="tab" aria-selected="false">
+                <i class="tab-dot tab-look"></i>Tampilan
+              </button>
+              <button class="category-tab" type="button" data-category="sensor" role="tab" aria-selected="false">
+                <i class="tab-dot tab-sensor"></i>Sensor
+              </button>
+            </div>
+
+            <div class="block-catalog" id="blockCatalog"></div>
+
+            <div class="catalog-footer">
+              <span><svg><use href="#icon-drag"></use></svg> Tips: klik blok untuk menambahkannya ke area koding</span>
+              <span class="catalog-count" id="catalogCount">0 blok</span>
+            </div>
+          </section>
+        </div>
+
+        <section class="panel code-panel" aria-labelledby="codeTitle">
+          <header class="code-header">
+            <div class="code-title">
+              <span class="code-file-icon"><svg><use href="#icon-blocks"></use></svg></span>
+              <div>
+                <h2 id="codeTitle">program-01<span>.kido</span><i class="file-dot" id="fileDot"></i></h2>
+                <p>Karya <strong>Tim Kidobot</strong> &middot; <span id="blockCount">0</span> blok</p>
+              </div>
+            </div>
+            <div class="code-actions">
+              <span class="save-state" id="saveState"><svg><use href="#icon-check"></use></svg> Tersimpan</span>
+              <div class="tool-button-group">
+                <button class="icon-button compact" id="undoButton" type="button" aria-label="Undo" title="Undo">
+                  <svg><use href="#icon-undo"></use></svg>
+                </button>
+                <button class="icon-button compact" id="redoButton" type="button" aria-label="Redo" title="Redo">
+                  <svg><use href="#icon-redo"></use></svg>
+                </button>
+                <button class="icon-button compact" id="centerButton" type="button" aria-label="Tengahkan workspace" title="Tengahkan workspace">
+                  <svg><use href="#icon-target"></use></svg>
+                </button>
+              </div>
+              <button class="run-button" id="runButton" type="button">
+                <svg><use href="#icon-play"></use></svg>
+                <span id="runButtonLabel">Jalankan</span>
+                <kbd>Ctrl &#9166;</kbd>
+              </button>
+              <button class="stop-button" id="stopButton" type="button" aria-label="Hentikan program" title="Hentikan program" disabled>
+                <svg><use href="#icon-stop"></use></svg>
+              </button>
+            </div>
+          </header>
+
+          <div class="editor-toolbar">
+            <span class="workspace-label"><i></i> Area susun blok</span>
+            <span class="editor-tip">Hubungkan blok dari atas ke bawah, lalu tekan Jalankan.</span>
+            <button class="ghost-button" id="clearButton" type="button">Kosongkan</button>
+          </div>
+
+          <div class="blockly-wrap">
+            <div id="blocklyDiv"></div>
+          </div>
+
+          <footer class="run-console">
+            <div class="console-message">
+              <span class="console-dot" id="consoleDot"></span>
+              <span id="consoleText">Workspace siap. Susun blok lalu tekan Jalankan.</span>
+            </div>
+            <div class="console-meta">
+              <span>Blockly</span>
+              <span class="console-separator"></span>
+              <span>v13</span>
+            </div>
+          </footer>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <span>Kidobot Studio <i>&middot;</i> Robotika Polinema</span>
+        <span class="footer-status"><i></i> Semua sistem siap</span>
+        <span>FPS <b id="fpsValue">60</b></span>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <dialog class="help-dialog" id="helpDialog">
+      <div class="help-header">
+        <div>
+          <span class="eyebrow">Panduan cepat</span>
+          <h2>Cara bermain dengan Kidobot</h2>
+        </div>
+        <button class="icon-button compact" id="closeHelpButton" type="button" aria-label="Tutup bantuan">
+          <svg><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="help-steps">
+        <article>
+          <span class="step-number">01</span>
+          <span class="step-icon"><svg><use href="#icon-blocks"></use></svg></span>
+          <h3>Pilih blok</h3>
+          <p>Klik salah satu blok di katalog kiri, atau drag langsung ke area koding.</p>
+        </article>
+        <article>
+          <span class="step-number">02</span>
+          <span class="step-icon"><svg><use href="#icon-grid"></use></svg></span>
+          <h3>Susun program</h3>
+          <p>Hubungkan blok di bawah blok <strong>ketika dijalankan</strong> untuk membuat urutan aksi.</p>
+        </article>
+        <article>
+          <span class="step-number">03</span>
+          <span class="step-icon"><svg><use href="#icon-play"></use></svg></span>
+          <h3>Jalankan</h3>
+          <p>Tekan Jalankan dan lihat robot bergerak di arena 3D. Stop kapan saja.</p>
+        </article>
+      </div>
+      <div class="help-shortcuts">
+        <span><kbd>Ctrl</kbd><kbd>&#9166;</kbd> Jalankan</span>
+        <span><kbd>Esc</kbd> Hentikan</span>
+        <span><kbd>Scroll</kbd> Zoom kamera</span>
+        <span><kbd>Drag</kbd> Putar kamera</span>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
